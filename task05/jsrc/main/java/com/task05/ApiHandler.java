@@ -24,7 +24,7 @@ public class ApiHandler implements RequestHandler<Map<String, Object>, Map<Strin
 	public ApiHandler() {
 		AmazonDynamoDB client = AmazonDynamoDBClientBuilder.defaultClient();
 		DynamoDB dynamoDB = new DynamoDB(client);
-		eventsTable = dynamoDB.getTable("cmtr-57544369-Events");
+		eventsTable = dynamoDB.getTable("cmtr-57544369-Events-test");
 	}
 
 	public Map<String, Object> handleRequest(Map<String, Object> request, Context context) {
