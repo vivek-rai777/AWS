@@ -25,7 +25,7 @@ import com.syndicate.deployment.model.RetentionSetting;
 @RuleEventSource(targetRule = "uuid_trigger")
 public class UuidGenerator implements RequestHandler<Object, String> {
 
-	private static final String BUCKET_NAME = "cmtr-57544369-uuid-storage";
+	private static final String BUCKET_NAME = "cmtr-57544369-uuid-storage-test";
 
 	@Override
 	public String handleRequest(Object input, Context context) {
