@@ -1,0 +1,5 @@
+com\task10\ApiHandler.class
+com\task10\handler\ReservationsHandler.class
+com\task10\handler\TablesHandler.class
+com\task10\pojo\Reservations.class
+com\task10\pojo\Tables.class
