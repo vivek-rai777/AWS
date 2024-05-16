@@ -154,8 +154,7 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, A
             System.out.println(authRequest);
             InitiateAuthResponse authResponse = cognitoClient.initiateAuth(authRequest);
             System.out.println(authResponse);
-//            response.setBody("{ \"accessToken\": \"" + authResponse.authenticationResult().accessToken() + "\"}");
-            response.setBody("{ \"accessToken\":" + authResponse.authenticationResult().accessToken() + "}");
+            response.setBody("{ \"accessToken\": \"" + authResponse.authenticationResult().accessToken() + "\"}");
             response.setStatusCode(200);
         } catch (NotAuthorizedException e) {
             System.out.println(e);
