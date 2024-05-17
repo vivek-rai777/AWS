@@ -41,6 +41,7 @@ public class ReservationsHandler {
 
         long count = reservationsDynamoDbTable.scan().items().stream()
                 .filter(x -> x.getDate().equals(reservationItem.getDate()))
+                .filter(x -> x.getTableNumber() == reservationItem.getTableNumber())
                 .filter(x-> c.compare(x.getSlotTimeStart(), reservationItem.getSlotTimeStart()) <= 0 &&
                         c.compare(reservationItem.getSlotTimeStart(), x.getSlotTimeEnd()) <= 0).count();
         System.out.println("Count : " + count);
