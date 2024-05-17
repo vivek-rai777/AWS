@@ -6,7 +6,6 @@ import com.google.gson.Gson;
 import com.task10.pojo.Reservations;
 import com.task10.pojo.Tables;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable;
-import software.amazon.awssdk.enhanced.dynamodb.Key;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -25,13 +24,15 @@ public class ReservationsHandler {
         Gson gson = new Gson();
         Reservations reservationItem = gson.fromJson(request.getBody(), Reservations.class);
         System.out.println(reservationItem);
-        int tableId = reservationItem.getTableNumber();
-        System.out.println("TABLE ID : " + tableId);
-        Tables item = tablesDynamoDbTable.getItem(Key.builder().partitionValue(tableId).build());
-        System.out.println("ITEM : " + item);
+        int tableNumber = reservationItem.getTableNumber();
+
+        long countTableNumber = tablesDynamoDbTable.scan().items().stream()
+                .filter(x -> x.getNumber() == tableNumber)
+                .count();
+
         APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
 
-        if (item == null) {
+        if (countTableNumber ==  0) {
             response.setStatusCode(400);
             return response;
         }
@@ -43,6 +44,7 @@ public class ReservationsHandler {
                 .filter(x-> c.compare(x.getSlotTimeStart(), reservationItem.getSlotTimeStart()) <= 0 &&
                         c.compare(reservationItem.getSlotTimeStart(), x.getSlotTimeEnd()) <= 0).count();
         System.out.println("Count : " + count);
+
         if (count > 0) {
             response.setStatusCode(400);
             return response;
