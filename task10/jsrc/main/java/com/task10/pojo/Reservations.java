@@ -68,5 +68,18 @@ public class Reservations {
     public void setSlotTimeEnd(String slotTimeEnd) {
         this.slotTimeEnd = slotTimeEnd;
     }
+
+    @Override
+    public String toString() {
+        return "Reservations{" +
+                "id='" + id + '\'' +
+                ", tableNumber=" + tableNumber +
+                ", clientName='" + clientName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", date='" + date + '\'' +
+                ", slotTimeStart='" + slotTimeStart + '\'' +
+                ", slotTimeEnd='" + slotTimeEnd + '\'' +
+                '}';
+    }
 }
  

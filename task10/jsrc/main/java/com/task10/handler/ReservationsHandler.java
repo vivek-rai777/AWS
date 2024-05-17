@@ -22,9 +22,9 @@ public class ReservationsHandler {
 
     public APIGatewayProxyResponseEvent postReservations(APIGatewayProxyRequestEvent request) {
         System.out.println("Post Reservations");
-
         Gson gson = new Gson();
         Reservations reservationItem = gson.fromJson(request.getBody(), Reservations.class);
+        System.out.println(reservationItem);
         int tableId = reservationItem.getTableNumber();
         System.out.println("TABLE ID : " + tableId);
         Tables item = tablesDynamoDbTable.getItem(Key.builder().partitionValue(tableId).build());
